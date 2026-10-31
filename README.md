@@ -5,6 +5,8 @@
 
 ![hero](renders/final-hero.png)
 
+**在线看（手机也能开）：<https://ljjjc123.github.io/japanese-konbini/>**
+
 ## 运行
 
 双击 `serve.cmd`（会用本地 HTTP 服务打开 `index.html`，默认端口 8024）。
@@ -12,6 +14,8 @@
 
 > `index.html` 通过 importmap 引用随项目附带的 `./vendor/three`（three r169 的 build 与所需 addons），
 > 无需 npm install；但必须用 HTTP 方式打开，直接双击 HTML 会被浏览器的模块 CORS 策略拦住。
+> 想直接发文件给别人，用 `konbini-share.html`（单文件、可双击离线打开）；想自己部署，
+> 用 `konbini-site.zip`（拖到 Netlify Drop / 任意静态托管即可）。
 
 重新构建：`node node_modules/typescript/bin/tsc -p tsconfig.json`
 截图：`node tools/shot.mjs renders/out.png hero 1600 1067`（需先在项目目录起 8023 端口的静态服务）
