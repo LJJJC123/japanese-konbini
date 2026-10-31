@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ひかりマート · Japanese Konbini</title>
+  <meta property="og:title" content="ひかりマート 三丁目店 · 日式便利店三维建模" />
+  <meta property="og:description" content="程序化建模的日式便利店夜景：建筑、店内、停车场、售货机、电线杆。可自由旋转、切换机位。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body, #app { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0a0d14; }
+    body { font-family: ui-sans-serif, -apple-system, "Segoe UI", "Yu Gothic UI", "Noto Sans JP", sans-serif; color: #e8eef7; }
+    canvas { display: block; }
+    #hud { position: fixed; left: 24px; top: 22px; width: 274px; padding: 16px 18px 14px; border-radius: 14px;
+      background: rgba(12,18,28,.62); backdrop-filter: blur(14px); border: 1px solid rgba(150,190,255,.14);
+      box-shadow: 0 22px 60px rgba(0,0,0,.45); user-select: none; }
+    #hud h1 { margin: 0 0 3px; font-size: 17px; font-weight: 650; letter-spacing: .02em; }
+    #hud .sub { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #8fa4c2; margin-bottom: 12px; }
+    #hud .meta { font-size: 10.5px; line-height: 1.55; color: #9fb0c8; padding-bottom: 10px; margin-bottom: 10px;
+      border-bottom: 1px solid rgba(150,190,255,.12); }
+    #hud .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 9px; }
+    #hud button { appearance: none; border: 1px solid rgba(150,190,255,.18); background: rgba(255,255,255,.06);
+      color: #d6e2f2; padding: 6px 9px; border-radius: 8px; font-size: 10.5px; cursor: pointer; transition: .15s ease; }
+    #hud button:hover { background: rgba(255,255,255,.14); border-color: rgba(150,190,255,.36); }
+    #hud button.active { background: #dfe9f8; color: #0d1622; border-color: #dfe9f8; }
+    #hud label { display: block; font-size: 10.5px; color: #8fa4c2; margin: 7px 0 4px; letter-spacing: .04em; }
+    #hud input[type=range] { width: 100%; accent-color: #ffb454; }
+    #picked { font-size: 10.5px; line-height: 1.45; color: #b6c6dd; min-height: 28px; padding: 7px 8px; border-radius: 8px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(150,190,255,.1); }
+    #picked b { color: #eef4fc; font-weight: 600; }
+    #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #0a0d14;
+      color: #9fb0c8; font-size: 12.5px; letter-spacing: .05em; z-index: 20; transition: opacity .4s; }
+    .hint { position: fixed; right: 24px; bottom: 20px; font-size: 10.5px; color: #7e91ad; letter-spacing: .04em; user-select: none; }
+    @media (max-width: 760px) { #hud { left: 10px; top: 10px; width: calc(100% - 20px); } .hint { display: none; } }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="loading">組み立て中 · building geometry and procedural materials…</div>
+  <aside id="hud">
+    <h1>ひかりマート 三丁目店</h1>
+    <div class="sub">Hikari Mart · konbini at blue hour</div>
+    <div class="meta">Procedural three.js model — shell, glazing, interior, forecourt<br>Real geometry · canvas PBR maps · bloom</div>
+    <div class="row">
+      <button data-view="hero">Hero</button>
+      <button data-view="entrance">Entrance</button>
+      <button data-view="inside">Inside</button>
+      <button data-view="aerial">Aerial</button>
+      <button data-view="street">Street</button>
+      <button data-view="detail">Detail</button>
+    </div>
+    <div class="row">
+      <button id="spin">Auto-rotate</button>
+      <button id="reset">Reset</button>
+      <button id="quality">Bloom</button>
+    </div>
+    <div id="picked">Click a part to inspect</div>
+  </aside>
+  <div class="hint">drag to orbit · scroll to zoom · 1–6 presets</div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/build/three.module.js",
+        "three/addons/": "./vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
